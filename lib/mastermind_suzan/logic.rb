@@ -1,0 +1,70 @@
+require_relative 'validation'
+require_relative 'messages'
+require_relative  'color'
+require_relative  'player'
+require 'pry'
+
+module MastermindSuzan
+
+  class Logic
+    include Validation
+    include Messages
+    attr_reader :get_user_input
+    attr_reader :counter, :count
+
+    def initialize(player)
+      @player = player
+    end
+
+    def get_guess
+      @user_input = collect_guess(@player)
+    end
+
+    def zip_user_input
+      @player.gamecolor.zip(@user_input)
+    end
+
+    def perfect_positions
+      @player.gamecolor.zip(@user_input)
+      @match = zip_user_input.select{|elem| elem[0] == elem[1]}
+      @match
+    end
+
+    def check_guess
+      if @user_input == @player.gamecolor
+        @player.duration = Time.now - @player.start_time
+        puts congrats_msg(@player)
+        replay_game
+      else
+        perfect_positions
+        partial_match
+      end
+    end
+
+    def partial_match
+      partial_matches = zip_user_input.select{|elem| elem[0] != elem[1]}
+      system_partial_match, user_partial_match = partial_matches.transpose
+      partial_color_match = []
+      user_partial_match.each do |element|
+        if system_partial_match.include? element
+          system_partial_match.delete_at(system_partial_match.index(element))
+          partial_color_match << element
+        end
+        @counter = partial_color_match.count
+      end
+    end
+
+    def feedback_to_user(count)
+      puts feedback_guess(@user_input, @match.count, @counter, @player.count)
+    end
+
+    def cheat
+      puts sequence_generated(@player.gamecolor)
+    end
+
+    def replay_game
+      puts play_again
+      check_replay_input
+    end
+  end
+end
