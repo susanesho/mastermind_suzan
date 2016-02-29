@@ -5,7 +5,6 @@ require_relative  'player'
 require 'pry'
 
 module MastermindSuzan
-
   class Logic
     include Validation
     include Messages
@@ -18,6 +17,12 @@ module MastermindSuzan
 
     def get_guess
       @user_input = collect_guess(@player)
+
+      if command?
+        puts command_action
+      else
+        @player.guesses << @user_input.join("")
+      end
     end
 
     def zip_user_input
@@ -26,7 +31,7 @@ module MastermindSuzan
 
     def perfect_positions
       @player.gamecolor.zip(@user_input)
-      @match = zip_user_input.select{|elem| elem[0] == elem[1]}
+      @match = zip_user_input.select { |elem| elem[0] == elem[1] }
       @match
     end
 
@@ -41,8 +46,13 @@ module MastermindSuzan
       end
     end
 
+    def command?
+      command = ["h", "c", "history", "cheat"]
+      command.include? @user_input.join("")
+    end
+
     def partial_match
-      partial_matches = zip_user_input.select{|elem| elem[0] != elem[1]}
+      partial_matches = zip_user_input.select { |elem| elem[0] != elem[1] }
       system_partial_match, user_partial_match = partial_matches.transpose
       partial_color_match = []
       user_partial_match.each do |element|
@@ -54,17 +64,30 @@ module MastermindSuzan
       end
     end
 
-    def feedback_to_user(count)
-      puts feedback_guess(@user_input, @match.count, @counter, @player.count)
+    def feedback_to_user
+      unless command?
+        puts feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
+      end
     end
 
     def cheat
-      puts sequence_generated(@player.gamecolor)
+      sequence_generated(@player.gamecolor)
+    end
+
+    def history
+      @player.guesses
     end
 
     def replay_game
       puts play_again
       check_replay_input
+    end
+
+    def command_action
+      case @user_input.join("")
+      when "h", "history" then history
+      when "c", "cheat" then cheat
+      end
     end
   end
 end

@@ -1,8 +1,7 @@
 module MastermindSuzan
   module Messages
-
     def welcome_user
-       " Welcome to Mastermind\n Would you like to (p)lay, read the (i)instructions, or (q)uit?"
+      " Welcome to Mastermind\n Would you like to (p)lay, read the (i)instructions, or (q)uit?"
     end
 
     def beginner_sequence
@@ -28,15 +27,15 @@ module MastermindSuzan
     end
 
     def feedback_guess(userinput, perfectmatch, partialmatch, counts)
-    "#{userinput} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
+      "#{userinput} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
     end
 
     def short_input
-     "Your input is too short"
+      'Your input is too short'
     end
 
     def long_input
-      "Your input is too long"
+      'Your input is too long'
     end
 
     def congrats_msg(player)
@@ -44,11 +43,11 @@ module MastermindSuzan
     end
 
     def play_again
-      "Do you want to (p)lay again or (q)uit?"
+      'Do you want to (p)lay again or (q)uit?'
     end
 
     def level_message
-      " choose a level, (b)eginner, (i)ntermediate or (a)dvanced? "
+      ' choose a level, (b)eginner, (i)ntermediate or (a)dvanced? '
     end
 
     def sequence_generated(cheat)
@@ -56,11 +55,11 @@ module MastermindSuzan
     end
 
     def valid_input
-      "Please enter a valid input"
+      'Please enter a valid input'
     end
 
     def character_check
-      "Invalid character exiting.............."
+      'Invalid character exiting..............'
     end
   end
 end

@@ -10,10 +10,10 @@ module MastermindSuzan
       @player = player
       loop do
         @guess = gets.chomp.downcase
-        break if @guess.length == @player.gamecolor.length
+        break if check_valid_input?(@guess)
         input_error(@guess.length)
       end
-      @guess.split("")
+      @guess.split('')
     end
 
     def input_error(guess_length)
@@ -27,14 +27,20 @@ module MastermindSuzan
     def check_replay_input
       loop do
         player_input = gets.chomp.downcase
-        if player_input == "p" || player_input == "play"
+        if player_input == 'p' || player_input == 'play'
           GameEngine.new.start
-        elsif player_input == "q" || player_input == "quit"
+        elsif player_input == 'q' || player_input == 'quit'
           exit
         else
           puts valid_input
         end
       end
+    end
+
+    def check_valid_input?(guess)
+      command = ["h", "c", "history", "cheat"]
+      return true if command.include? guess
+      guess.length == @player.gamecolor.length
     end
   end
 end
