@@ -13,6 +13,3 @@ describe MastermindSuzan::Logic do
   end
 
   end
-
-
-
