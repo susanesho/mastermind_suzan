@@ -16,7 +16,7 @@ module MastermindSuzan
         else
           puts character_check
           exit
-         end
+          end
       end
     end
   end

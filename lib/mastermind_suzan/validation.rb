@@ -1,6 +1,6 @@
 require_relative 'logic'
 require_relative 'game_engine'
-require 'pry'
+#require 'pry'
 
 module MastermindSuzan
   module Validation
@@ -38,7 +38,7 @@ module MastermindSuzan
     end
 
     def check_valid_input?(guess)
-      command = ["h", "c", "history", "cheat"]
+      command = %w(h c history cheat)
       return true if command.include? guess
       guess.length == @player.gamecolor.length
     end

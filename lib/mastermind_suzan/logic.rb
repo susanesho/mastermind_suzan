@@ -2,7 +2,7 @@ require_relative 'validation'
 require_relative 'messages'
 require_relative  'color'
 require_relative  'player'
-require 'pry'
+#require 'pry'
 
 module MastermindSuzan
   class Logic
@@ -15,13 +15,13 @@ module MastermindSuzan
       @player = player
     end
 
-    def get_guess
+    def player_guess
       @user_input = collect_guess(@player)
 
       if command?
         puts command_action
       else
-        @player.guesses << @user_input.join("")
+        @player.guesses << @user_input.join('')
       end
     end
 
@@ -47,8 +47,8 @@ module MastermindSuzan
     end
 
     def command?
-      command = ["h", "c", "history", "cheat"]
-      command.include? @user_input.join("")
+      command = %w(h c history cheat)
+      command.include? @user_input.join('')
     end
 
     def partial_match
@@ -66,7 +66,7 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-        puts feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
+        feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
       end
     end
 
@@ -84,9 +84,9 @@ module MastermindSuzan
     end
 
     def command_action
-      case @user_input.join("")
-      when "h", "history" then history
-      when "c", "cheat" then cheat
+      case @user_input.join('')
+      when 'h', 'history' then history
+      when 'c', 'cheat' then cheat
       end
     end
   end
