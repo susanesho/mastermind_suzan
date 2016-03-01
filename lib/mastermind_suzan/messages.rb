@@ -1,3 +1,4 @@
+
 module MastermindSuzan
   module Messages
     def welcome_user
@@ -27,7 +28,7 @@ module MastermindSuzan
     end
 
     def feedback_guess(userinput, perfectmatch, partialmatch, counts)
-      '#{userinput} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess'
+      "#{userinput} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
     end
 
     def short_input
@@ -38,7 +39,7 @@ module MastermindSuzan
       'Your input is too long'
     end
 
-    def congrats_msg
+    def congrats_msg(player)
       'Congratulations! you guessed the sequence #{player.gamecolor} in #{player.count} guess(es) over #{player.duration}'
     end
 
@@ -50,8 +51,8 @@ module MastermindSuzan
       ' choose a level, (b)eginner, (i)ntermediate or (a)dvanced? '
     end
 
-    def sequence_generated
-      'The sequence generated is #{cheat}'
+    def sequence_generated(player)
+      "The sequence generated is #{player.gamecolor}"
     end
 
     def valid_input

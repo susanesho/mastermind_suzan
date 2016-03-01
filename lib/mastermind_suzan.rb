@@ -1,10 +1,13 @@
-require 'mastermind_suzan/version'
-require 'mastermind_suzan/game_engine'
 require 'mastermind_suzan/messages'
+require 'mastermind_suzan/logic'
+require 'mastermind_suzan/game_engine'
+require 'mastermind_suzan/validation'
+
 
 module MastermindSuzan
   class GameRun
     include Messages
+    include Validation
     def initialize
       puts welcome_user
       input = gets.chomp.downcase

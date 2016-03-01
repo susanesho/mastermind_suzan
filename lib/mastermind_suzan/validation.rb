@@ -1,6 +1,5 @@
 require_relative 'logic'
 require_relative 'game_engine'
-#require 'pry'
 
 module MastermindSuzan
   module Validation
@@ -13,7 +12,7 @@ module MastermindSuzan
         break if check_valid_input?(@guess)
         input_error(@guess.length)
       end
-      @guess.split('')
+      @guess.split("")
     end
 
     def input_error(guess_length)

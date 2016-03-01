@@ -23,7 +23,7 @@ module MastermindSuzan
       puts level_message
       level = gets.chomp.downcase
       @player = Player.new(level)
-      Color.new.set(@player)
+      @player.gamecolor = Color.new.set(@player)
     end
   end
 end

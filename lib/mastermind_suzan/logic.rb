@@ -2,13 +2,14 @@ require_relative 'validation'
 require_relative 'messages'
 require_relative  'color'
 require_relative  'player'
-#require 'pry'
+
+
 
 module MastermindSuzan
   class Logic
     include Validation
     include Messages
-    attr_reader :get_user_input
+    attr_reader :user_input
     attr_reader :counter, :count
 
     def initialize(player)
@@ -21,7 +22,7 @@ module MastermindSuzan
       if command?
         puts command_action
       else
-        @player.guesses << @user_input.join('')
+        @player.guesses << @user_input.join("")
       end
     end
 
@@ -48,7 +49,7 @@ module MastermindSuzan
 
     def command?
       command = %w(h c history cheat)
-      command.include? @user_input.join('')
+      command.include? @user_input.join("")
     end
 
     def partial_match
@@ -66,12 +67,12 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-        feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
+      p feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
       end
     end
 
     def cheat
-      sequence_generated(@player.gamecolor)
+      sequence_generated(@player)
     end
 
     def history
@@ -84,7 +85,7 @@ module MastermindSuzan
     end
 
     def command_action
-      case @user_input.join('')
+      case @user_input.join("")
       when 'h', 'history' then history
       when 'c', 'cheat' then cheat
       end
