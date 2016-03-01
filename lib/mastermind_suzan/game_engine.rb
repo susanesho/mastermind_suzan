@@ -11,7 +11,7 @@ module MastermindSuzan
       logic = Logic.new(@player)
       p @player.gamecolor
       until @player.guesses.length >= 13
-        logic.get_guess
+        logic.player_guess
         logic.check_guess
         logic.feedback_to_user
       end
