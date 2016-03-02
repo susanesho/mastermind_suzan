@@ -2,6 +2,7 @@ require_relative 'validation'
 require_relative 'messages'
 require_relative  'color'
 require_relative  'player'
+require "byebug"
 
 
 
@@ -9,7 +10,7 @@ module MastermindSuzan
   class Logic
     include Validation
     include Messages
-    attr_reader :user_input
+    attr_accessor :user_input
     attr_reader :counter, :count
 
     def initialize(player)
@@ -22,22 +23,22 @@ module MastermindSuzan
       if command?
         puts command_action
       else
-        @player.guesses << @user_input.join("")
+        @player.guesses << user_input.join("")
       end
     end
 
     def zip_user_input
-      @player.gamecolor.zip(@user_input)
+      @player.gamecolor.zip(user_input)
     end
 
     def perfect_positions
-      @player.gamecolor.zip(@user_input)
+      @player.gamecolor.zip(user_input)
       @match = zip_user_input.select { |elem| elem[0] == elem[1] }
       @match
     end
 
     def check_guess
-      if @user_input == @player.gamecolor
+      if user_input == @player.gamecolor
         @player.duration = Time.now - @player.start_time
         puts congrats_msg(@player)
         replay_game
@@ -49,7 +50,7 @@ module MastermindSuzan
 
     def command?
       command = %w(h c history cheat)
-      command.include? @user_input.join("")
+      command.include? user_input.join("")
     end
 
     def partial_match
@@ -67,7 +68,7 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-      p feedback_guess(@user_input, @match.count, @counter, @player.guesses.length)
+      p feedback_guess(user_input, @match.count, @counter, @player.guesses.length)
       end
     end
 
@@ -85,7 +86,7 @@ module MastermindSuzan
     end
 
     def command_action
-      case @user_input.join("")
+      case user_input.join("")
       when 'h', 'history' then history
       when 'c', 'cheat' then cheat
       end

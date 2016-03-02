@@ -20,6 +20,56 @@ describe MastermindSuzan::Logic do
     end
   end
 
+  context "#cheat" do
+    it "returns game colours" do
+      player.gamecolor = %w(r g b y)
+      expect(logic).to receive(:sequence_generated).with(player)
+      logic.cheat
+    end
+  end
+
+  context "#command_action" do
+    it " should call cheat if user input is c or cheat" do
+      logic.user_input = %w(c)
+      expect(logic).to receive(:cheat)
+      logic.command_action
+    end
+
+    it "should call history if user input is h or history" do
+      logic.user_input = %w(h)
+      expect(logic).to receive(:history)
+      logic.command_action
+    end
+  end
+
+  context "#command?" do
+    it "returns true if it is a command" do
+      logic.user_input = %w(h)
+      expect(logic.command?).to be true
+    end
+
+    it "returns false if it is not a command" do
+      logic.user_input = %w(p)
+      expect(logic.command?).to be false
+    end
+  end
+
+  context "#partial_match" do
+    it"returns partial match" do
+      player.gamecolor = %w(r g b y)
+      logic.user_input = %w(r y g b)
+      expect(logic.partial_match.count).to be 3
+    end
+  end
+
+  context "#perfect_positions" do
+    it"returns partial match" do
+      player.gamecolor = %w(r g b y)
+      logic.user_input = %w(r y g b)
+      expect(logic.perfect_positions.count).to be 1
+    end
+  end
+
   # context "#player_guess" do
   #   it "should return an array of vvlength 2" do
   #     player.guesses = ["kkkk", "byrg"]
