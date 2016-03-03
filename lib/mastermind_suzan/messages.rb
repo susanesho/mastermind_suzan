@@ -28,7 +28,6 @@ module MastermindSuzan
     end
 
     def feedback_guess(userinput, perfectmatch, partialmatch, counts)
-
       "#{userinput.join} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
     end
 
@@ -49,7 +48,7 @@ module MastermindSuzan
     end
 
     def level_message
-       "choose a level, (b)eginner, (i)ntermediate or (a)dvanced? "
+      "choose a level, (b)eginner, (i)ntermediate or (a)dvanced? "
     end
 
     def sequence_generated(player)

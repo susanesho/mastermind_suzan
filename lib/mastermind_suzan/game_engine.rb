@@ -1,13 +1,10 @@
-require_relative 'color'
-require_relative 'player'
-require_relative 'messages'
-require_relative 'logic'
-
-
+require_relative "color"
+require_relative "player"
+require_relative "messages"
+require_relative "logic"
 
 module MastermindSuzan
   class GameEngine
-
     attr_accessor :player
 
     include Messages

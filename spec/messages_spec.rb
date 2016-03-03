@@ -1,8 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe MastermindSuzan::Messages do
-
-  let(:my_messages) {Class.new  {extend MastermindSuzan::Messages}}
+  let(:my_messages) { Class.new { extend MastermindSuzan::Messages } }
   context "#game_guide"
   it "should print the module game guide" do
     expect(my_messages.game_guide).to be_a String
@@ -38,6 +37,4 @@ describe MastermindSuzan::Messages do
   it "should print the character check mesage"do
     expect(my_messages.character_check).to be_a String
   end
-
 end
-

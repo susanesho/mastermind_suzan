@@ -1,19 +1,11 @@
 require "spec_helper"
 describe MastermindSuzan::Logic do
-  let(:player) { MastermindSuzan::Player.new('b') }
-  subject(:logic) {MastermindSuzan::Logic.new(player)}
-
-  # context "zip_user_input" do
-  #   it " returns a zipped array" do
-  #     allow(player).to receive(:guess).and_return(['r','r','b','y'])
-  #     allow(logic).to receive(@user_input).and_return(['b','r','o','y'])
-  #     expect(logic.zip_user_input).to eq([['r','b'],['r','r'],['b','o'],['y','y']])
-  #   end
-  # end
+  let(:player) { MastermindSuzan::Player.new("b") }
+  subject(:logic) { MastermindSuzan::Logic.new(player) }
 
   context "#history" do
     it "should return an array of length 2" do
-      player.guesses = ["kkkk", "byrg"]
+      player.guesses = %w(kkkk byrg)
       allow(logic).to receive(:gets).and_return("bbgy")
       expect(logic.history).to be_an Array
       expect(logic.history.length).to eq 2
@@ -55,7 +47,7 @@ describe MastermindSuzan::Logic do
   end
 
   context "#partial_match" do
-    it"returns partial match" do
+    it "returns partial match" do
       player.gamecolor = %w(r g b y)
       logic.user_input = %w(r y g b)
       expect(logic.partial_match.count).to be 3
@@ -63,7 +55,7 @@ describe MastermindSuzan::Logic do
   end
 
   context "#perfect_positions" do
-    it"returns partial match" do
+    it "returns partial match" do
       player.gamecolor = %w(r g b y)
       logic.user_input = %w(r y g b)
       expect(logic.perfect_positions.count).to be 1
@@ -83,9 +75,9 @@ describe MastermindSuzan::Logic do
 
   context "#replay_game" do
     it "checks if the user can play again" do
-     expect(logic).to receive(:puts).and_return "Do you want to (p)lay again dor (q)uit?"
-     expect(logic).to receive(:check_replay_input)
-     logic.replay_game
+      expect(logic).to receive(:puts).and_return "Do you want to (p)lay again dor (q)uit?"
+      expect(logic).to receive(:check_replay_input)
+      logic.replay_game
     end
   end
 
@@ -99,12 +91,10 @@ describe MastermindSuzan::Logic do
     end
 
     it "goes to the methods partial match, and perfect position" do
-       player.gamecolor = %w(r g b y)
-       logic.user_input = %w(r b g y)
-       allow(logic).to receive(:puts).with "rbgy has 4 correct element, you have 2 in the correct position, you have taken 0 guess"
-       logic.check_guess
+      player.gamecolor = %w(r g b y)
+      logic.user_input = %w(r b g y)
+      allow(logic).to receive(:puts).with "rbgy has 4 correct element, you have 2 in the correct position, you have taken 0 guess"
+      logic.check_guess
     end
   end
-
-
 end
