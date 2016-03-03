@@ -2,7 +2,6 @@ require_relative 'validation'
 require_relative 'messages'
 require_relative  'color'
 require_relative  'player'
-require "byebug"
 
 
 
@@ -68,7 +67,7 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-      p feedback_guess(user_input, @match.count, @counter, @player.guesses.length)
+      puts feedback_guess(user_input, @match.count, @counter, @player.guesses.length)
       end
     end
 

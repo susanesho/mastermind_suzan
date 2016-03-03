@@ -70,11 +70,44 @@ describe MastermindSuzan::Logic do
     end
   end
 
-  # context "#player_guess" do
-  #   it "should return an array of vvlength 2" do
-  #     player.guesses = ["kkkk", "byrg"]
-  #     expect(logic.player_guess).to be_an Array
-  #   end
-  # end
+  context "#player_guess" do
+    it "checks if the input of the user is false and returns an array" do
+      allow(logic).to receive(:collect_guess).and_return %w(r g b y)
+      allow(logic).to receive(:command).and_return false
+      expect(logic.player_guess).to be_an Array
+    end
+    it "checks if the guess of the user is true and calls the command_action method" do
+      allow(logic).to receive(:command).and_return true
+     expect(logic).to receive(:command_action)
+     logic.command_action
+    end
+  end
+
+  context "#feedback_to_user" do
+    it "check if the user_input is not a command and prints the the feedback message" do
+      allow(logic).to receive(:command).and_return false
+      allow(logic).to receive(:feedback_guess).and_return String
+      expect(logic.feedback_to_user).to be nil
+    end
+  end
+
+  context "#replay_game" do
+    it "checks if the user can play again" do
+     allow(logic).to receive(:puts).and_return "Do you want to (p)lay again or (q)uit?"
+     allow(logic).to receive(:check_replay_input).and_return("q")
+    end
+  end
+
+  context "#check_guess" do
+    it "checks if the user guess is in perfect or partial position with that of the player" do
+      player.gamecolor = %w(r g b y)
+      logic.user_input = %w(r g b y)
+      expect(player.gamecolor).to eql logic.user_input
+      expect(logic).to receive(:congrats_msg).with(player)
+      allow(logic).to receive(:replay_game).and_return replay_game
+
+    end
+  end
+
 
 end

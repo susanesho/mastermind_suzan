@@ -14,10 +14,6 @@ describe MastermindSuzan::Messages do
     end
   end
 
-  context "#feedback_guess(userinput, perfectmatch, partialmatch, counts)"
-  # it "should print the module message for feedback guess" do
-  #   expect(my_messages.feedback_guess("user_input", perfect_match, partial_match, counts)).to be_a String
-  # end
   context "#valid_input"
   it "should print the module message for level message" do
     expect(my_messages.valid_input).to be_a String
