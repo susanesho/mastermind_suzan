@@ -29,5 +29,15 @@ describe MastermindSuzan::Messages do
     expect(my_messages.long_input).to be_a String
   end
 
+  context "#level_message"
+  it "should print the level message" do
+    expect(my_messages.level_message).to be_a String
+  end
+
+  context "#character_check"
+  it "should print the character check mesage"do
+    expect(my_messages.character_check).to be_a String
+  end
+
 end
 

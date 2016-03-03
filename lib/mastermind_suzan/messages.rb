@@ -29,7 +29,7 @@ module MastermindSuzan
 
     def feedback_guess(userinput, perfectmatch, partialmatch, counts)
 
-      "#{userinput} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
+      "#{userinput.join} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
     end
 
     def short_input
@@ -41,7 +41,7 @@ module MastermindSuzan
     end
 
     def congrats_msg(player)
-      "Congratulations! you guessed the sequence #{player.gamecolor} in #{player.count} guess(es) over #{player.duration}"
+      "Congratulations! you guessed the sequence #{player.gamecolor.join} in #{player.count} guess(es) over #{player.duration}"
     end
 
     def play_again

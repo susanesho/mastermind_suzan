@@ -9,7 +9,7 @@ module MastermindSuzan
   class Logic
     include Validation
     include Messages
-    attr_accessor :user_input
+    attr_accessor :user_input, :match
     attr_reader :counter, :count
 
     def initialize(player)
@@ -44,6 +44,7 @@ module MastermindSuzan
       else
         perfect_positions
         partial_match
+        feedback_to_user
       end
     end
 
@@ -67,7 +68,7 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-      puts feedback_guess(user_input, @match.count, @counter, @player.guesses.length)
+      puts feedback_guess(user_input, match.count, counter, @player.guesses.length)
       end
     end
 
