@@ -102,9 +102,9 @@ describe MastermindSuzan::Logic do
     it "checks if the user guess is in perfect or partial position with that of the player" do
       player.gamecolor = %w(r g b y)
       logic.user_input = %w(r g b y)
+      allow(logic).to receive(:congrats_msg).with(player)
+      allow(logic).to receive(:logic.replay_game).and_return replay_game
       expect(player.gamecolor).to eql logic.user_input
-      expect(logic).to receive(:congrats_msg).with(player)
-      allow(logic).to receive(:replay_game).and_return replay_game
 
     end
   end
