@@ -8,11 +8,11 @@ module MastermindSuzan
     ADVANCED = %w(r g b y w p).freeze
 
     def set(player)
-      player.gamecolor = case player.level
-                         when 'b', 'beginner' then beginner
-                         when 'i', 'intermediate' then intermediate
-                         when 'a', 'advanced' then advanced
-                         end
+      case player.level
+      when 'b', 'beginner' then beginner
+      when 'i', 'intermediate' then intermediate
+      when 'a', 'advanced' then advanced
+      end
     end
 
     def beginner
