@@ -1,8 +1,7 @@
-require 'mastermind_suzan/messages'
-require 'mastermind_suzan/logic'
-require 'mastermind_suzan/game_engine'
-require 'mastermind_suzan/validation'
-
+require "mastermind_suzan/messages"
+require "mastermind_suzan/logic"
+require "mastermind_suzan/game_engine"
+require "mastermind_suzan/validation"
 
 module MastermindSuzan
   class GameRun
@@ -13,9 +12,9 @@ module MastermindSuzan
       input = gets.chomp.downcase
       loop do
         case input
-        when 'p', 'play' then GameEngine.new.start
-        when 'i', 'instructions' then game_guide
-        when 'q', 'quit' then exit
+        when "p", "play" then GameEngine.new.start
+        when "i", "instructions" then game_guide
+        when "q", "quit" then exit
         else
           puts character_check
           exit

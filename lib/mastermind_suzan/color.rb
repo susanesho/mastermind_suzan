@@ -1,4 +1,4 @@
-require_relative 'messages'
+require_relative "messages"
 
 module MastermindSuzan
   class Color
@@ -9,9 +9,9 @@ module MastermindSuzan
 
     def set(player)
       case player.level
-      when 'b', 'beginner' then beginner
-      when 'i', 'intermediate' then intermediate
-      when 'a', 'advanced' then advanced
+      when "b", "beginner" then beginner
+      when "i", "intermediate" then intermediate
+      when "a", "advanced" then advanced
       end
     end
 

@@ -1,9 +1,7 @@
-require_relative 'validation'
-require_relative 'messages'
-require_relative  'color'
-require_relative  'player'
-
-
+require_relative "validation"
+require_relative "messages"
+require_relative "color"
+require_relative "player"
 
 module MastermindSuzan
   class Logic
@@ -68,7 +66,7 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-      puts feedback_guess(user_input, match.count, counter, @player.guesses.length)
+        puts feedback_guess(user_input, match.count, counter, @player.guesses.length)
       end
     end
 
@@ -87,8 +85,8 @@ module MastermindSuzan
 
     def command_action
       case user_input.join("")
-      when 'h', 'history' then history
-      when 'c', 'cheat' then cheat
+      when "h", "history" then history
+      when "c", "cheat" then cheat
       end
     end
   end

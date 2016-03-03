@@ -1,9 +1,10 @@
-require_relative 'logic'
-require_relative 'game_engine'
+require_relative "logic"
+require_relative "game_engine"
 
 module MastermindSuzan
   module Validation
     include Messages
+    attr_accessor :player
 
     def collect_guess(player)
       @player = player
@@ -16,7 +17,7 @@ module MastermindSuzan
     end
 
     def input_error(guess_length)
-      if guess_length < @player.gamecolor.length
+      if guess_length < player.gamecolor.length
         puts short_input
       else
         puts long_input
@@ -26,9 +27,9 @@ module MastermindSuzan
     def check_replay_input
       loop do
         player_input = gets.chomp.downcase
-        if player_input == 'p' || player_input == 'play'
+        if player_input == "p" || player_input == "play"
           GameEngine.new.start
-        elsif player_input == 'q' || player_input == 'quit'
+        elsif player_input == "q" || player_input == "quit"
           exit
         else
           puts valid_input
@@ -39,7 +40,7 @@ module MastermindSuzan
     def check_valid_input?(guess)
       command = %w(h c history cheat)
       return true if command.include? guess
-      guess.length == @player.gamecolor.length
+      guess.length == player.gamecolor.length
     end
   end
 end
