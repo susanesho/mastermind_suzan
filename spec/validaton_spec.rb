@@ -29,17 +29,12 @@ describe MastermindSuzan::Validation do
     end
   end
 
-  # context "#check_replay_input" do
-  #   it "should start the game again if user enters p or play" do
-  #     allow(my_validation).to receive(:gets).and_return("p")
-  #     allow(my_validation).to receive(MastermindSuzan::GameEngine.new.start)
-  #     my_validation.check_replay_input
-  #     #expect(my_validation.check_replay_input).to be_an instance_of MastermindSuzan::GameEngine
-
-  #   end
-  # end
-
-
+  context "#check_replay_input" do
+    it "should exit the game if user inputs q or quit" do
+      allow(my_validation).to receive(:gets).and_return("q")
+      my_validation.check_replay_input
+    end
+  end
 end
 
 
