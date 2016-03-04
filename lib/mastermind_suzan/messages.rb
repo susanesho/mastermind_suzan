@@ -2,7 +2,7 @@
 module MastermindSuzan
   module Messages
     def welcome_user
-      " Welcome to Mastermind\n Would you like to (p)lay, read the (i)instructions, or (q)uit?"
+      "Welcome to Mastermind\n Would you like to (p)lay, read the (i)instructions, or (q)uit?"
     end
 
     def beginner_sequence
@@ -40,7 +40,7 @@ module MastermindSuzan
     end
 
     def congrats_msg(player)
-      "Congratulations! you guessed the sequence #{player.gamecolor.join} in #{player.count} guess(es) over #{player.duration}"
+      "Congratulations! you guessed the sequence #{player.gamecolor.join} in #{player.guesses.length} guess(es) over #{player.duration}"
     end
 
     def play_again
