@@ -11,8 +11,8 @@ module MastermindSuzan
     def start
       player_level
       logic = Logic.new(player)
-      p player.gamecolor
-      until player.guesses.length >= 13
+      player.gamecolor
+      until player.guesses.length >= 12
         logic.player_guess
         logic.check_guess
       end
