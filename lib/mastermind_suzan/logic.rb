@@ -75,10 +75,10 @@ module MastermindSuzan
 
     def history
       puts history_display_box
-      @player.guesses.select do |history_inputs|
-        history_input = history_inputs.split(",")
+      @player.guesses.select do |player_inputs|
+        history_input = player_inputs.split(",")
         history_input.delete(history_input.last)
-       puts "(#{@player.guesses.index(history_inputs) + 1}) Your input was '#{history_input.join(",").gsub(/have|has/, "had")}'"
+       puts "(#{@player.guesses.index(player_inputs) + 1}) Your input was '#{history_input.join(",").gsub(/have|has/, "had")}'"
       end
     end
 
