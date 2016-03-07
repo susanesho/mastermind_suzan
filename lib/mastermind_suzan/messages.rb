@@ -28,7 +28,7 @@ module MastermindSuzan
     end
 
     def feedback_guess(userinput, perfectmatch, partialmatch, counts)
-      "#{userinput.join} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts} guess"
+      "#{userinput.join} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts + 1} guess"
     end
 
     def short_input
