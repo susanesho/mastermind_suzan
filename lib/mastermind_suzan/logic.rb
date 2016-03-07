@@ -2,7 +2,6 @@ require_relative "validation"
 require_relative "messages"
 require_relative "color"
 require_relative "player"
-require 'pry'
 
 module MastermindSuzan
   class Logic
