@@ -9,7 +9,6 @@ module MastermindSuzan
     include Messages
     attr_accessor :user_input, :match
     attr_reader :counter, :count
-
     def initialize(player)
       @player = player
     end
@@ -19,8 +18,6 @@ module MastermindSuzan
 
       if command?
         puts command_action
-      else
-        @player.guesses << user_input.join("")
       end
     end
 
@@ -66,7 +63,8 @@ module MastermindSuzan
 
     def feedback_to_user
       unless command?
-        puts feedback_guess(user_input, match.count, counter, @player.guesses.length)
+        player.guesses << feedback_guess(user_input, match.count, counter, @player.guesses.length)
+        puts player.guesses.last
       end
     end
 
@@ -76,7 +74,11 @@ module MastermindSuzan
 
     def history
       puts history_display_box
-      @player.guesses.each {|history_inputs| puts "(#{@player.guesses.index(history_inputs) + 1}) Your input was '#{history_inputs}', you had #{match.count}perfects, #{counter} partial"}
+      @player.guesses.select do |player_inputs|
+        history_input = player_inputs.split(",")
+        history_input.delete(history_input.last)
+       puts "(#{@player.guesses.index(player_inputs) + 1}) Your input was '#{history_input.join(",").gsub(/have|has/, "had")}'"
+      end
     end
 
     def replay_game
