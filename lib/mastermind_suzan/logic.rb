@@ -75,7 +75,8 @@ module MastermindSuzan
     end
 
     def history
-      @player.guesses
+      puts history_display_box
+      @player.guesses.each {|history_inputs| puts "(#{@player.guesses.index(history_inputs) + 1}) Your input was '#{history_inputs}', you had #{match.count}perfects, #{counter} partial"}
     end
 
     def replay_game
