@@ -62,5 +62,11 @@ module MastermindSuzan
     def character_check
       "Invalid character exiting.............."
     end
+    def history_display_box
+      "A display of your history below"
+    end
+    def history_feedback(player, perfectmatch, partialmatch)
+        "#{player.guesses} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position"
+    end
   end
 end
