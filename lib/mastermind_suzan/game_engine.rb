@@ -11,20 +11,17 @@ module MastermindSuzan
     def start
       player_level
       logic = Logic.new(player)
-      player.gamecolor
       until player.guesses.length >= 12
         logic.player_guess
         logic.check_guess
       end
-      logic.cheat
-      logic.replay_game
     end
 
     def player_level
       puts level_message
       level = gets.chomp.downcase
       @player = Player.new(level)
-      player.gamecolor = Color.new.set(player)
+      player.gamecolor = Color.new.set(level)
     end
   end
 end
