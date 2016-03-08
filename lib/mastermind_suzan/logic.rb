@@ -1,7 +1,8 @@
-require_relative "validation"
 require_relative "messages"
 require_relative "color"
 require_relative "player"
+$LOAD_PATH.unshift("#{File.dirname( __FILE__)}/../../bin/cli")
+require "valid"
 
 module MastermindSuzan
   class Logic

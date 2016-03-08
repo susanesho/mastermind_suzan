@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   end
   spec.bindir        = "bin"
   spec.executables   = ["mastermind"]
-  spec.require_paths = ["lib"]
+  spec.require_paths = ["bin/cli"]
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
