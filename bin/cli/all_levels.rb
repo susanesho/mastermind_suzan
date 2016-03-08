@@ -1,15 +1,16 @@
+require "mastermind_suzan/game_engine"
 require "mastermind_suzan/color"
 require "mastermind_suzan/player"
 require "mastermind_suzan/messages"
 require "mastermind_suzan/logic"
-require "mastermind_suzan/game_engine"
 
 
-class Tired
+
+class Awesome
     attr_accessor :player
   include Messages
 
-  def player_level
+  def self.player_level
     puts level_message
     level = gets.chomp.downcase
     @player = Player.new(level)

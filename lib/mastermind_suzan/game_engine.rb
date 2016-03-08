@@ -11,7 +11,7 @@ module MastermindSuzan
     include Messages
 
     def start
-      Tired.player_level
+      Process.player_level
       logic = Logic.new(player)
       until player.guesses.length >= 12
         logic.player_guess
