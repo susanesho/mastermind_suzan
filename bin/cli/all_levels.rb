@@ -17,6 +17,5 @@ module MastermindSuzan
       player.gamecolor = Color.new.set(level)
       player
     end
-
   end
 end

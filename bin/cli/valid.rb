@@ -47,5 +47,12 @@ module MastermindSuzan
       return true if command.include? guess
       guess.length == player.gamecolor.length
     end
+
+    def replay_game
+      puts play_again
+      check_replay_input
+    end
+
+
   end
 end

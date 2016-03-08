@@ -2,23 +2,25 @@ require_relative "messages"
 require_relative "color"
 require_relative "player"
 $LOAD_PATH.unshift("#{File.dirname( __FILE__)}/../../bin/cli")
+require "splitted_logic"
 require "valid"
 
 module MastermindSuzan
   class Logic
     include Validation
     include Messages
-    attr_accessor :user_input, :match
+    attr_accessor :user_input, :match, :player
     attr_reader :counter, :count
+
     def initialize(player)
       @player = player
     end
 
     def player_guess
       @user_input = collect_guess(@player)
-
+        @par = SplittedLogic.new(player)
       if command?
-        puts command_action
+       command_action
       end
     end
 
@@ -35,7 +37,7 @@ module MastermindSuzan
     def check_guess
       if user_input == @player.gamecolor
         @player.duration = Time.now - @player.start_time
-        puts congrats_msg(@player)
+        @par.congratulate_user
         replay_game
       else
         perfect_positions
@@ -65,26 +67,21 @@ module MastermindSuzan
     def feedback_to_user
       unless command?
         player.guesses << feedback_guess(user_input, match.count, counter, @player.guesses.length)
-        puts player.guesses.last
+        @par.current_feedback_to_user
       end
     end
 
     def cheat
-      sequence_generated(@player)
+      @par.cheat_message_to_player
     end
 
     def history
-      puts history_display_box
-      @player.guesses.select do |player_inputs|
-        history_input = player_inputs.split(",")
+      @par.history_first_message
+      @player.guesses.each_with_index do |guess, index|
+        history_input = guess.split(",")
         history_input.delete(history_input.last)
-       puts "(#{@player.guesses.index(player_inputs) + 1}) Your input was '#{history_input.join(",").gsub(/have|has/, "had")}'"
+        @par.history_details_to_user(index, history_input)
       end
-    end
-
-    def replay_game
-      puts play_again
-      check_replay_input
     end
 
     def command_action
