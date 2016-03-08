@@ -7,23 +7,16 @@ require "all_levels"
 
 module MastermindSuzan
   class GameEngine
-    attr_accessor :player
     include Messages
+    attr_accessor :player
 
     def start
-      Process.player_level
+      @player = AllLevels.new.player_level
       logic = Logic.new(player)
       until player.guesses.length >= 12
         logic.player_guess
         logic.check_guess
       end
     end
-
-    # def player_level
-    #   puts level_message
-    #   level = gets.chomp.downcase
-    #   @player = Player.new(level)
-    #   player.gamecolor = Color.new.set(player)
-    # end
   end
 end

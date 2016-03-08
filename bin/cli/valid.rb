@@ -1,5 +1,8 @@
-require "mastermind_suzan/logic"
-require "mastermind_suzan/game_engine"
+$LOAD_PATH.unshift("#{File.dirname( __FILE__)}/../../lib/mastermind_suzan")
+require "messages"
+require "logic"
+require "game_engine"
+require  "player"
 require_relative 'valid'
 
 module MastermindSuzan

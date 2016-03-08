@@ -1,19 +1,22 @@
-require "mastermind_suzan/game_engine"
-require "mastermind_suzan/color"
-require "mastermind_suzan/player"
-require "mastermind_suzan/messages"
-require "mastermind_suzan/logic"
+$LOAD_PATH.unshift("#{File.dirname( __FILE__)}/../../lib/mastermind_suzan")
+require "game_engine"
+require "color"
+require "player"
+require "messages"
+require "logic"
 
 
-
-class Awesome
+module MastermindSuzan
+  class AllLevels
+    include Messages
     attr_accessor :player
-  include Messages
+    def player_level
+      puts level_message
+      level = gets.chomp.downcase
+      @player = Player.new(level)
+      player.gamecolor = Color.new.set(level)
+      player
+    end
 
-  def self.player_level
-    puts level_message
-    level = gets.chomp.downcase
-    @player = Player.new(level)
-    player.gamecolor = Color.new.set(player)
   end
 end

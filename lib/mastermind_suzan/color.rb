@@ -7,8 +7,8 @@ module MastermindSuzan
     INTERMEDIATE = %w(r g b y w).freeze
     ADVANCED = %w(r g b y w p).freeze
 
-    def set(player)
-      case player.level
+    def set(level)
+      case level
       when "b", "beginner" then beginner
       when "i", "intermediate" then intermediate
       when "a", "advanced" then advanced
