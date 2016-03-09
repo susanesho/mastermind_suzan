@@ -5,15 +5,14 @@ require_relative "logic"
 
 module MastermindSuzan
   class GameEngine
-    attr_accessor :player
-
     include Messages
+    attr_accessor :player
     def start
       player_level
       logic = Logic.new(player)
       until player.guesses.length >= 12
-        logic.player_guess
-        logic.check_guess
+        logic.process_player_valid_input
+        logic.process_player_guess
       end
     end
 

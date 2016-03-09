@@ -16,7 +16,7 @@ module MastermindSuzan
     end
 
     def beginner
-      puts beginner_sequence
+      puts beginner_level_message
       random_sequence = []
       4.times do
         random_sequence << BEGINNER.sample
@@ -25,7 +25,7 @@ module MastermindSuzan
     end
 
     def intermediate
-      puts intermediate_sequence
+      puts intermediate_level_message
       random_sequence = []
       6.times do
         random_sequence << INTERMEDIATE.sample
@@ -34,7 +34,7 @@ module MastermindSuzan
     end
 
     def advanced
-      puts advanced_sequence
+      puts advanced_level_message
       random_sequence = []
       8.times do
         random_sequence << ADVANCED.sample

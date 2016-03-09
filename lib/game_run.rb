@@ -6,11 +6,9 @@ require "mastermind_suzan/validation"
 module MastermindSuzan
   class GameRun
     include Messages
-    include Validation
     def start
       puts welcome_user
       input = gets.chomp.downcase
-      loop do
         case input
         when "p", "play" then GameEngine.new.start
         when "i", "instructions" then game_guide
@@ -19,7 +17,6 @@ module MastermindSuzan
           puts character_check
           exit
           end
-      end
     end
   end
 end

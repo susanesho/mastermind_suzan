@@ -1,19 +1,18 @@
-
 module MastermindSuzan
   module Messages
     def welcome_user
       "Welcome to Mastermind\n Would you like to (p)lay, read the (i)instructions, or (q)uit?"
     end
 
-    def beginner_sequence
+    def beginner_level_message
       "I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. \n Use (q)uit at any time to end the game. What's your guess?\n"
     end
 
-    def intermediate_sequence
+    def intermediate_level_message
       "I have generated an intermediate sequence with six elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, and (w)hite. \n Use (q)uit at any time to end the game. What's your guess?\n"
     end
 
-    def advanced_sequence
+    def advanced_level_message
       "I have generated an advanced sequence with eight elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (w)hite and (y)ellow. \n Use (q)uit at any time to end the game. What's your guess?\n"
     end
 
@@ -27,8 +26,8 @@ module MastermindSuzan
       To quit the game at any point enter q or quit\n"
     end
 
-    def feedback_guess(userinput, perfectmatch, partialmatch, counts)
-      "#{userinput.join} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position, you have taken #{counts + 1} guess"
+    def feedback_message(userinput, perfect_matches_counter, partial_match_counter, count)
+      "#{userinput.join} has #{perfect_matches_counter + partial_match_counter} correct element, you have #{perfect_matches_counter} in the correct position, you have taken #{count + 1} guess"
     end
 
     def short_input
@@ -39,7 +38,7 @@ module MastermindSuzan
       "Your input is too long"
     end
 
-    def congrats_msg(player)
+    def congrats_message(player)
       "Congratulations! you guessed the sequence #{player.gamecolor.join} in #{player.guesses.length} guess(es) over #{player.duration}"
     end
 
@@ -51,7 +50,7 @@ module MastermindSuzan
       "choose a level, (b)eginner, (i)ntermediate or (a)dvanced? "
     end
 
-    def sequence_generated(player)
+    def sequence_generated_message(player)
       "The sequence generated is #{player.gamecolor}"
     end
 
@@ -62,11 +61,9 @@ module MastermindSuzan
     def character_check
       "Invalid character exiting.............."
     end
-    def history_display_box
+
+    def history_header_display
       "A display of your history below"
-    end
-    def history_feedback(player, perfectmatch, partialmatch)
-        "#{player.guesses} has #{perfectmatch + partialmatch} correct element, you have #{perfectmatch} in the correct position"
     end
   end
 end
