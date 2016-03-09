@@ -13,7 +13,7 @@ module MastermindSuzan
     end
 
     def advanced_level_message
-      "I have generated an advanced sequence with eight elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (w)hite and (y)ellow. \n Use (q)uit at any time to end the game. What's your guess?\n"
+      "I have generated an advanced sequence with eight elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (w)hite, (y)ellow, and (p)urple. \n Use (q)uit at any time to end the game. What's your guess?\n"
     end
 
     def game_guide
@@ -26,8 +26,8 @@ module MastermindSuzan
       To quit the game at any point enter q or quit\n"
     end
 
-    def feedback_message(userinput, perfect_matches_counter, partial_match_counter, count)
-      "#{userinput.join} has #{perfect_matches_counter + partial_match_counter} correct element, you have #{perfect_matches_counter} in the correct position, you have taken #{count + 1} guess"
+    def feedback_message(userinput, perfect_match_count, partial_match_count, count)
+      "#{userinput.join} has #{perfect_match_count + partial_match_count} correct element, you have #{perfect_match_count} in the correct position, you have taken #{count + 1} guess"
     end
 
     def short_input
@@ -50,8 +50,8 @@ module MastermindSuzan
       "choose a level, (b)eginner, (i)ntermediate or (a)dvanced? "
     end
 
-    def sequence_generated_message(player)
-      "The sequence generated is #{player.gamecolor}"
+    def sequence_code_message(player)
+      "The sequence generated is #{player.gamecolor.join}"
     end
 
     def valid_input
@@ -62,7 +62,7 @@ module MastermindSuzan
       "Invalid character exiting.............."
     end
 
-    def history_header_display
+    def history_header
       "A display of your history below"
     end
   end

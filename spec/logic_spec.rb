@@ -1,100 +1,100 @@
 require "spec_helper"
 describe MastermindSuzan::Logic do
   let(:player) { MastermindSuzan::Player.new("b") }
-  subject(:logic) { MastermindSuzan::Logic.new(player) }
+  let(:logic) { MastermindSuzan::Logic.new(player) }
+  let(:validation) { MastermindSuzan::Validation.new(player) }
 
-  context "#history" do
-    it "should return an array of length 2" do
-      player.guesses = %w(kkkk byrg)
-      allow(logic).to receive(:gets).and_return("bbgy")
-      expect(logic.history).to be_an Array
-      expect(logic.history.length).to eq 2
+  # context "#set_user_input" do
+  #   # it "returns the input" do
+  #   #   # allow(logic).to receive(:validation.collect_guess).and_return %w(r g b y)
+  #   #   expect(logic.user_input).to be %w(r g b y)
+  #   #   logic.set_user_input
+  #   # end
+  #   it "checks if the input of the user includes the element in the history and cheat views Array and returns result of the array based on the element picked guess" do
+  #     allow(validation).to receive(:collect_guess).and_return %w(r g b y)
+  #     # expect(logic).to receive(:check_history_and_cheat_views)
+  #     logic.set_user_input
+  #   end
+  # end
+
+  context "#history_or_cheat?" do
+    it "returns true if the player input is c or h" do
+      logic.user_input = %w(h)
+      expect(logic.history_or_cheat?).to be true
+    end
+
+    it "returns false if the player input is not any of c or h" do
+      logic.user_input = %w(p)
+      expect(logic.history_or_cheat?).to be false
     end
   end
 
-  context "#cheat" do
-    it "returns game colours" do
-      player.gamecolor = %w(r g b y)
-      expect(logic).to receive(:sequence_generated).with(player)
-      logic.cheat
-    end
-  end
-
-  context "#command_action" do
+  context "#display_history_or_cheat" do
     it " should call cheat if user input is c or cheat" do
       logic.user_input = %w(c)
-      expect(logic).to receive(:cheat)
-      logic.command_action
+      expect(logic).to receive(:sequence_code)
+      logic.display_history_or_cheat
     end
 
     it "should call history if user input is h or history" do
       logic.user_input = %w(h)
-      expect(logic).to receive(:history)
-      logic.command_action
+      expect(logic).to receive(:guess_history)
+      logic.display_history_or_cheat
     end
   end
 
-  context "#command?" do
-    it "returns true if it is a command" do
+  context "#sequence_code" do
+    it " should diplay the sequence code" do
+      player.gamecolor = %w(r g b y)
+      expect(logic).to receive(:puts).with("The sequence generated is rgby")
+      logic.sequence_code
+    end
+
+    it "should call history if user input is h or history" do
       logic.user_input = %w(h)
-      expect(logic.command?).to be true
-    end
-
-    it "returns false if it is not a command" do
-      logic.user_input = %w(p)
-      expect(logic.command?).to be false
+      expect(logic).to receive(:guess_history)
+      logic.display_history_or_cheat
     end
   end
 
-  context "#partial_match" do
-    it "returns partial match" do
-      player.gamecolor = %w(r g b y)
-      logic.user_input = %w(r y g b)
-      expect(logic.partial_match.count).to be 3
-    end
-  end
-
-  context "#perfect_positions" do
-    it "returns partial match" do
-      player.gamecolor = %w(r g b y)
-      logic.user_input = %w(r y g b)
-      expect(logic.perfect_positions.count).to be 1
-    end
-  end
-
-  context "#player_guess" do
-    it "checks if the input of the user is false and returns an array" do
-      allow(logic).to receive(:collect_guess).and_return %w(r g b y)
-      expect(logic.player_guess).to be_an Array
-    end
-    it "checks if the guess of the user is true and calls the command_action method" do
-      allow(logic).to receive(:collect_guess).and_return %w(c)
-      logic.player_guess
-    end
-  end
-
-  context "#replay_game" do
-    it "checks if the user can play again" do
-      expect(logic).to receive(:puts).and_return "Do you want to (p)lay again dor (q)uit?"
-      expect(logic).to receive(:check_replay_input)
-      logic.replay_game
-    end
-  end
-
-  context "#check_guess" do
-    it "prints congratulation message to the user if guess is correct" do
-      player.gamecolor = %w(r g b y)
-      logic.user_input = %w(r g b y)
-      allow(logic).to receive(:puts).and_return("sss")
-      allow(logic).to receive(:replay_game)
-      logic.check_guess
+  context "#process_guess" do
+    it " should processes the guess of the player" do
+      logic.user_input = %w(r g b r)
+      player.gamecolor = %w(r y b g)
+      expect(logic).to receive(:puts).with("rgbr has 3 correct element, you have 2 in the correct position, you have taken 1 guess")
+      logic.process_guess
     end
 
-    it "goes to the methods partial match, and perfect position" do
-      player.gamecolor = %w(r g b y)
-      logic.user_input = %w(r b g y)
-      allow(logic).to receive(:puts).with "rbgy has 4 correct element, you have 2 in the correct position, you have taken 0 guess"
-      logic.check_guess
-    end
+    # it "should call history if user input is h or history" do
+    #   logic.user_input = %w(h)
+    #   expect(logic).to receive(:guess_history)
+    #   logic.display_history_or_cheat
+    # end
   end
+
+
+  # context "#guess_history" do
+  #   it "should return an array of length 2" do
+  #     player.guesses = %w(kkkk byrg)
+  #     allow(logic).to receive(:puts).once.with("A display of your history below")
+  #     logic.guess_history
+  #   end
+  # end
+  #
+  # context "#current_sequence_color_generated" do
+  #   it "returns the sequence color generated for the level the player picks" do
+  #     player.gamecolor = %w(r g b y)
+  #     expect(logic).to receive(:sequence_generated).with(player)
+  #     logic.current_sequence_color_generated
+  #   end
+  # end
+  #
+
+  # context "#replay_game" do
+  #   it "checks if the user can play again" do
+  #     expect(logic).to receive(:puts).and_return "Do you want to (p)lay again dor (q)uit?"
+  #     expect(logic).to receive(:check_replay_input)
+  #     logic.replay_game
+  #   end
+  # end
 end

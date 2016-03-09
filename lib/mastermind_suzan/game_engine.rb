@@ -11,8 +11,8 @@ module MastermindSuzan
       player_level
       logic = Logic.new(player)
       until player.guesses.length >= 12
-        logic.process_player_valid_input
-        logic.process_player_guess
+        logic.set_user_input
+        logic.process_guess
       end
     end
 

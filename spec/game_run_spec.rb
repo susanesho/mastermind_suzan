@@ -10,7 +10,7 @@ describe MastermindSuzan::GameRun do
 
     it "should exit without a valid input" do
       allow(subject).to receive(:gets).and_return("l")
-       expect { subject.start }.to raise_error SystemExit
+      expect { subject.start }.to raise_error SystemExit
     end
   end
 end

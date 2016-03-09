@@ -6,8 +6,11 @@ module MastermindSuzan
     include Messages
     attr_accessor :player
 
-    def collect_guess(player)
+    def initialize(player)
       @player = player
+    end
+
+    def collect_guess
       loop do
         @guess = gets.chomp.downcase
         break if check_valid_input?(@guess)
