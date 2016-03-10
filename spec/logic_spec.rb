@@ -11,8 +11,11 @@ describe MastermindSuzan::Logic do
   #   #   logic.set_user_input
   #   # end
   #   it "checks if the input of the user includes the element in the history and cheat views Array and returns result of the array based on the element picked guess" do
-  #     allow(validation).to receive(:collect_guess).and_return %w(r g b y)
-  #     # expect(logic).to receive(:check_history_and_cheat_views)
+  #     # validation = mock("validation")
+  #     #   MastermindSuzan::Validation.stub(:new) { validation }
+  #       expect(validation).to receive(:gets).and_return %w(c)
+  #     # allow(validation).to receive(:collect_guess).and_return %w(r g b y)
+  #     # allow(logic.validation).to receive(:gets).with %w(c)
   #     logic.set_user_input
   #   end
   # end
@@ -65,21 +68,22 @@ describe MastermindSuzan::Logic do
       logic.process_guess
     end
 
-    # it "should call history if user input is h or history" do
-    #   logic.user_input = %w(h)
-    #   expect(logic).to receive(:guess_history)
-    #   logic.display_history_or_cheat
-    # end
+    it " should processes the guess of the player" do
+      logic.user_input = %w(r g b r)
+      player.gamecolor = %w(r g b r)
+      expect(logic).to receive(:replay_game)
+      logic.process_guess
+    end
   end
 
 
-  # context "#guess_history" do
-  #   it "should return an array of length 2" do
-  #     player.guesses = %w(kkkk byrg)
-  #     allow(logic).to receive(:puts).once.with("A display of your history below")
-  #     logic.guess_history
-  #   end
-  # end
+  context "#guess_history" do
+    it "should display a history of guesses" do
+      player.guesses = %w(kkkk)
+      allow(logic).to receive(:history_message).with(0,"kkkk", [])
+      logic.guess_history
+    end
+  end
   #
   # context "#current_sequence_color_generated" do
   #   it "returns the sequence color generated for the level the player picks" do

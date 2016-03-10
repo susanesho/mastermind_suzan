@@ -1,3 +1,2 @@
-require "game_run"
-MastermindSuzan::GameRun.new.start
-
+require "game_engine"
+MastermindSuzan::GameEngine.new.start

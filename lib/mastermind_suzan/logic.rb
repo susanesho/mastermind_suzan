@@ -18,7 +18,7 @@ module MastermindSuzan
       @validation = Validation.new(player)
       @user_input = validation.collect_guess
       if history_or_cheat?
-        history_cheat
+        display_history_or_cheat
       end
     end
 
@@ -36,12 +36,10 @@ module MastermindSuzan
 
     def guess_history
       puts history_header
-      player.guesses.select do |guess|
+      player.guesses.each_with_index do |guess, index|
         history_input = guess.split(",")
         history_input.delete(history_input.last)
-        puts "(#{player.guesses.
-          index(guess) + 1}) Your input '#{history_input.join(',').
-          gsub(/have|has/, 'had').gsub('you had', 'and')}'"
+        puts history_message(index, guess, history_input)
       end
     end
 
@@ -50,15 +48,14 @@ module MastermindSuzan
     end
 
     def zip_code_with_guess
-      collected_zipped_result = player.gamecolor.zip(user_input)
-      collected_zipped_result
+      player.gamecolor.zip(user_input)
     end
 
     def process_guess
       if user_input == player.gamecolor
         player.duration = Time.now - player.start_time
         puts congrats_message(player)
-        validation.replay_game
+        replay_game
       else
         select_perfect_matches
         select_partial_matches
@@ -89,6 +86,11 @@ module MastermindSuzan
         player.guesses << feedback_message(user_input, perfect_match_count, partial_match_count, @player.guesses.length)
         puts player.guesses.last
       end
+    end
+
+    def replay_game
+      puts play_again
+      validation.check_replay_input
     end
   end
 end

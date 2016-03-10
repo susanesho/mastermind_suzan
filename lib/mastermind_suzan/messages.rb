@@ -65,5 +65,10 @@ module MastermindSuzan
     def history_header
       "A display of your history below"
     end
+
+    def history_message(index, guess, history_input)
+      "(#{index + 1}) Your input '#{history_input.join(',').
+        gsub(/have|has/, 'had').gsub('you had', 'and')}'"
+    end
   end
 end
