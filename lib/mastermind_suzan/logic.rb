@@ -2,54 +2,77 @@ require_relative "validation"
 require_relative "messages"
 require_relative "color"
 require_relative "player"
+require "byebug"
 
 module MastermindSuzan
   class Logic
-    include Validation
     include Messages
-    attr_accessor :user_input, :match
-    attr_reader :counter, :count
+    attr_accessor :user_input, :perfect_match_count, :validation, :player
+    attr_reader :partial_match_count, :count
+
     def initialize(player)
       @player = player
     end
 
-    def player_guess
-      @user_input = collect_guess(@player)
-
-      if command?
-        puts command_action
+    def set_user_input
+      @validation = Validation.new(player)
+      @user_input = validation.collect_guess
+      if history_or_cheat?
+        history_cheat
       end
     end
 
-    def zip_user_input
-      @player.gamecolor.zip(user_input)
+    def history_or_cheat?
+      history_and_cheat_views_arr = %w(h c history cheat)
+      history_and_cheat_views_arr.include? user_input.join("")
     end
 
-    def perfect_positions
-      @player.gamecolor.zip(user_input)
-      @match = zip_user_input.select { |elem| elem[0] == elem[1] }
-      @match
+    def display_history_or_cheat
+      case user_input.join("")
+      when "h", "history" then guess_history
+      when "c", "cheat" then sequence_code
+      end
     end
 
-    def check_guess
-      if user_input == @player.gamecolor
-        @player.duration = Time.now - @player.start_time
-        puts congrats_msg(@player)
-        replay_game
+    def guess_history
+      puts history_header
+      player.guesses.select do |guess|
+        history_input = guess.split(",")
+        history_input.delete(history_input.last)
+        puts "(#{player.guesses.
+          index(guess) + 1}) Your input '#{history_input.join(',').
+          gsub(/have|has/, 'had').gsub('you had', 'and')}'"
+      end
+    end
+
+    def sequence_code
+      puts sequence_code_message(player)
+    end
+
+    def zip_code_with_guess
+      collected_zipped_result = player.gamecolor.zip(user_input)
+      collected_zipped_result
+    end
+
+    def process_guess
+      if user_input == player.gamecolor
+        player.duration = Time.now - player.start_time
+        puts congrats_message(player)
+        validation.replay_game
       else
-        perfect_positions
-        partial_match
+        select_perfect_matches
+        select_partial_matches
         feedback_to_user
       end
     end
 
-    def command?
-      command = %w(h c history cheat)
-      command.include? user_input.join("")
+    def select_perfect_matches
+      perfect_matches = zip_code_with_guess.select { |elem| elem[0] == elem[1] }
+      @perfect_match_count = perfect_matches.count
     end
 
-    def partial_match
-      partial_matches = zip_user_input.select { |elem| elem[0] != elem[1] }
+    def select_partial_matches
+      partial_matches = zip_code_with_guess.select { |elem| elem[0] != elem[1] }
       system_partial_match, user_partial_match = partial_matches.transpose
       partial_color_match = []
       user_partial_match.each do |element|
@@ -57,39 +80,14 @@ module MastermindSuzan
           system_partial_match.delete_at(system_partial_match.index(element))
           partial_color_match << element
         end
-        @counter = partial_color_match.count
+        @partial_match_count = partial_color_match.count
       end
     end
 
     def feedback_to_user
-      unless command?
-        player.guesses << feedback_guess(user_input, match.count, counter, @player.guesses.length)
+      unless history_or_cheat?
+        player.guesses << feedback_message(user_input, perfect_match_count, partial_match_count, @player.guesses.length)
         puts player.guesses.last
-      end
-    end
-
-    def cheat
-      sequence_generated(@player)
-    end
-
-    def history
-      puts history_display_box
-      @player.guesses.select do |player_inputs|
-        history_input = player_inputs.split(",")
-        history_input.delete(history_input.last)
-       puts "(#{@player.guesses.index(player_inputs) + 1}) Your input was '#{history_input.join(",").gsub(/have|has/, "had")}'"
-      end
-    end
-
-    def replay_game
-      puts play_again
-      check_replay_input
-    end
-
-    def command_action
-      case user_input.join("")
-      when "h", "history" then history
-      when "c", "cheat" then cheat
       end
     end
   end

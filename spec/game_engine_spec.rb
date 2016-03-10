@@ -9,4 +9,5 @@ describe MastermindSuzan::Messages do
       subject.player_level
     end
   end
+
 end

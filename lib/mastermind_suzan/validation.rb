@@ -2,12 +2,15 @@ require_relative "logic"
 require_relative "game_engine"
 
 module MastermindSuzan
-  module Validation
+  class Validation
     include Messages
     attr_accessor :player
 
-    def collect_guess(player)
+    def initialize(player)
       @player = player
+    end
+
+    def collect_guess
       loop do
         @guess = gets.chomp.downcase
         break if check_valid_input?(@guess)
@@ -38,9 +41,14 @@ module MastermindSuzan
     end
 
     def check_valid_input?(guess)
-      command = %w(h c history cheat)
-      return true if command.include? guess
+      history_cheat_view_arr = %w(h c history cheat)
+      return true if history_cheat_view_arr.include? guess
       guess.length == player.gamecolor.length
+    end
+
+    def replay_game
+      puts play_again
+      check_replay_input
     end
   end
 end
