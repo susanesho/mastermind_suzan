@@ -20,7 +20,6 @@ Add this line to your application's Gemfile:
 ```rub
 gem 'mastermind_suzan'
 ```
-
 And then execute:
 
     $ bundle
@@ -31,20 +30,15 @@ Or install it yourself as:
 
 ## Game Play
 
-A splash screen is showed once a game is started from where the user can start a game or read instructions.
-
-A random code of varying legth is generated depending on the level  selected by the user.
-
-You have twelve guesses per game.
-
-On every guess, you are presented with a message identifying the number of elements you got correctly, and in what positions.
-
-To view entry history, enter h or history at any time.
-To view sequence generated, enter c or cheat at any time
-To quit the game at any point enter q or quit.
-
-The game is timed and on successful completion, the user gets a detail of his performance and a top players list is displayed
-
+* A splash screen is showed once a game is started from where the user can start a game or read instructions.
+* A random code of varying legth is generated depending on the level  selected by the user.
+* You have twelve guesses per game.
+* On every guess, you are presented with a message identifying the number of elements you got correctly, and in what           positions.
+* To view entry history, enter h or history at any time.
+* To view sequence generated, enter c or cheat at any time
+* To quit the game at any point enter q or quit.
+* The game is timed and on successful completion, the user gets a detail of his performance and a top players list is
+  displayed
 
 ## Development
 
