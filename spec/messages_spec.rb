@@ -39,12 +39,6 @@ describe MastermindSuzan::Messages do
     end
   end
 
-  # context "#feedback_message" do
-  #   it "shuld print the module message for feedback_message" do
-  #     expect(my_messages.feedback_message).to include("I have generated an advanced sequence with eight elements made up of: (r)ed, (g)reen, (b)lue, (y)ellow, (w)hite, (y)ellow, and (p)urple. \n Use (q)uit at any time to end the game. What's your guess?")
-  #   end
-  # end
-
   context "#short_input" do
     it "shuld print the module message for short input" do
       expect(my_messages.short_input).to include("Your input is too short")
@@ -57,12 +51,11 @@ describe MastermindSuzan::Messages do
     end
   end
 
-  # context "#congrats_message(player)" do
-  #   it "shuld print the module message for congrats_message" do
-  #
-  #     expect(my_messages.congrats_message).with(player).to include("Congratulations! you guessed the sequence #{player.gamecolor.join} in #{player.guesses.length} guess(es) over #{player.duration}")
-  #   end
-  # end
+  context "#play_again" do
+    it "should print the play again message" do
+      expect(my_messages.play_again).to include("Do you want to (p)lay again or (q)uit?")
+    end
+  end
 
   context "#level_message" do
     it "should print the level message" do
