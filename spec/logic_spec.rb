@@ -4,22 +4,6 @@ describe MastermindSuzan::Logic do
   let(:logic) { MastermindSuzan::Logic.new(player) }
   let(:validation) { MastermindSuzan::Validation.new(player) }
 
-  # context "#set_user_input" do
-  #   # it "returns the input" do
-  #   #   # allow(logic).to receive(:validation.collect_guess).and_return %w(r g b y)
-  #   #   expect(logic.user_input).to be %w(r g b y)
-  #   #   logic.set_user_input
-  #   # end
-  #   it "checks if the input of the user includes the element in the history and cheat views Array and returns result of the array based on the element picked guess" do
-  #     # validation = mock("validation")
-  #     #   MastermindSuzan::Validation.stub(:new) { validation }
-  #       expect(validation).to receive(:gets).and_return %w(c)
-  #     # allow(validation).to receive(:collect_guess).and_return %w(r g b y)
-  #     # allow(logic.validation).to receive(:gets).with %w(c)
-  #     logic.set_user_input
-  #   end
-  # end
-
   context "#history_or_cheat?" do
     it "returns true if the player input is c or h" do
       logic.user_input = %w(h)
@@ -76,7 +60,6 @@ describe MastermindSuzan::Logic do
     end
   end
 
-
   context "#guess_history" do
     it "should display a history of guesses" do
       player.guesses = %w(kkkk)
@@ -84,21 +67,4 @@ describe MastermindSuzan::Logic do
       logic.guess_history
     end
   end
-  #
-  # context "#current_sequence_color_generated" do
-  #   it "returns the sequence color generated for the level the player picks" do
-  #     player.gamecolor = %w(r g b y)
-  #     expect(logic).to receive(:sequence_generated).with(player)
-  #     logic.current_sequence_color_generated
-  #   end
-  # end
-  #
-
-  # context "#replay_game" do
-  #   it "checks if the user can play again" do
-  #     expect(logic).to receive(:puts).and_return "Do you want to (p)lay again dor (q)uit?"
-  #     expect(logic).to receive(:check_replay_input)
-  #     logic.replay_game
-  #   end
-  # end
 end
