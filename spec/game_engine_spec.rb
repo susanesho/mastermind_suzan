@@ -13,7 +13,7 @@ let(:player) { MastermindSuzan::Player.new("b") }
   context "#start" do
     it "should print instructions when the user enters i" do
       allow(subject).to receive(:gets).and_return("i")
-      subject.start
+      expect(subject.start).to be_a String
     end
 
     it "should start the game if user enters p" do
